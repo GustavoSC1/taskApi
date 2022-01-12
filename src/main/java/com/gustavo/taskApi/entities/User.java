@@ -11,49 +11,49 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Usuario {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
+	private String name;
 	
-	private LocalDate dataNascimento;
+	private LocalDate birthDate;
 	
 	private String cpf;
 	
 	private String email;
 	
-	private String senha;
+	private String password;
 	
-	@OneToMany(mappedBy = "usuario")
-	private List<Tarefa> tarefas = new ArrayList<>();
+	@OneToMany(mappedBy = "user")
+	private List<Task> tasks = new ArrayList<>();
 	
-	public Usuario() {
+	public User() {
 		
 	}
-
-	public Usuario(Long id, String nome, LocalDate dataNascimento, String cpf, String email, String senha) {
+	
+	public User(Long id, String name, LocalDate birthDate, String cpf, String email, String password) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
+		this.name = name;
+		this.birthDate = birthDate;
 		this.cpf = cpf;
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public LocalDate getBirthDate() {
+		return birthDate;
 	}
 
 	public String getCpf() {
@@ -64,24 +64,24 @@ public class Usuario {
 		return email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 	
-	public List<Tarefa> getTarefas() {
-		return tarefas;
+	public List<Task> getTasks() {
+		return tasks;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setCpf(String cpf) {
@@ -92,8 +92,8 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		User other = (User) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

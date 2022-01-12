@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.gustavo.taskApi.dtos.UsuarioNewDto;
-import com.gustavo.taskApi.dtos.UsuarioDto;
-import com.gustavo.taskApi.services.UsuarioService;
+import com.gustavo.taskApi.dtos.UserNewDto;
+import com.gustavo.taskApi.dtos.UserDto;
+import com.gustavo.taskApi.services.UserService;
 
 @RestController
-@RequestMapping(value="/usuarios")
-public class UsuarioController {
+@RequestMapping(value="/users")
+public class UserController {
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private UserService userService;
 	
 	@PostMapping()
-	public ResponseEntity<UsuarioDto> insert(@RequestBody @Valid UsuarioNewDto usuarioDto) {
-		UsuarioDto obj = usuarioService.insert(usuarioDto);
+	public ResponseEntity<UserDto> insert(@RequestBody @Valid UserNewDto userDto) {
+		UserDto obj = userService.insert(userDto);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
