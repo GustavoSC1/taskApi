@@ -1,5 +1,7 @@
 package com.gustavo.taskApi.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +10,20 @@ import com.gustavo.taskApi.dtos.UserNewDto;
 import com.gustavo.taskApi.entities.User;
 import com.gustavo.taskApi.repositories.UserRepository;
 
+import com.gustavo.taskApi.services.exceptions.ObjectNotFoundException;
+
 @Service
 public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	public UserDto findById(Long id) {
+		Optional<User> userOptional = userRepository.findById(id);
+		User user = userOptional.orElseThrow(() -> new ObjectNotFoundException( "Objeto não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
+		
+		return new UserDto(user);
+	}
 	
 	public UserDto insert(UserNewDto dto) {
 		User user = new User(null, dto.getName(), dto.getBirthDate(), dto.getCpf(), dto.getEmail(), dto.getPassword());

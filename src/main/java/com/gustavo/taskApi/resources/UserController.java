@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +25,14 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<UserDto> findById(@PathVariable Long id) {
+		UserDto userDto = userService.findById(id);
+		return ResponseEntity.ok().body(userDto);
+	}
+	
 	@PostMapping()
-	public ResponseEntity<UserDto> insert(@RequestBody @Valid UserNewDto userDto) {
+	public ResponseEntity<Void> insert(@RequestBody @Valid UserNewDto userDto) {
 		UserDto obj = userService.insert(userDto);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
