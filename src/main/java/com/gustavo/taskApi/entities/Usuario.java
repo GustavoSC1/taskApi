@@ -1,11 +1,14 @@
 package com.gustavo.taskApi.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -23,6 +26,9 @@ public class Usuario {
 	private String email;
 	
 	private String senha;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Tarefa> tarefas = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -60,6 +66,10 @@ public class Usuario {
 
 	public String getSenha() {
 		return senha;
+	}
+	
+	public List<Tarefa> getTarefas() {
+		return tarefas;
 	}
 
 	public void setId(Long id) {
