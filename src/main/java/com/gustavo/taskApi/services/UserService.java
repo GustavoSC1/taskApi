@@ -27,7 +27,7 @@ public class UserService {
 			throw new BusinessException("CPF ou Email já cadastrado");
 		}
 		
-		User user = new User(null, dto.getName(), dto.getBirthDate(), dto.getCpf(), dto.getEmail(), dto.getPassword());
+		User user = new User(null, dto.getName(), dto.getBirthDate(), dto.getCpf(), dto.getEmail());
 		user = userRepository.save(user);
 		return new UserDto(user);
 	}
@@ -38,7 +38,6 @@ public class UserService {
 		user.setBirthDate(dto.getBirthDate());
 		user.setCpf(dto.getCpf());
 		user.setEmail(dto.getEmail());
-		user.setPassword(dto.getPassword());
 		
 		user = userRepository.save(user);	
 		

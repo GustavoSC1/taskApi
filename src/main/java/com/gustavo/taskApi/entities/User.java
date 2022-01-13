@@ -25,8 +25,6 @@ public class User {
 	
 	private String email;
 	
-	private String password;
-	
 	@OneToMany(mappedBy = "user")
 	private List<Task> tasks = new ArrayList<>();
 	
@@ -34,14 +32,13 @@ public class User {
 		
 	}
 	
-	public User(Long id, String name, LocalDate birthDate, String cpf, String email, String password) {
+	public User(Long id, String name, LocalDate birthDate, String cpf, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 		this.cpf = cpf;
 		this.email = email;
-		this.password = password;
 	}
 	
 	public Long getId() {
@@ -62,10 +59,6 @@ public class User {
 
 	public String getEmail() {
 		return email;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 	
 	public List<Task> getTasks() {
@@ -90,10 +83,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	@Override
