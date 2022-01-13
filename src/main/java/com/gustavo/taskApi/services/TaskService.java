@@ -45,6 +45,11 @@ public class TaskService {
 		return new TaskDto(task);
 	}
 	
+	public void delete(Long id) {
+		Task task = findById(id);
+		taskRepository.delete(task);
+	}
+	
 	public Task findById(Long id) {
 		Optional<Task> taskOptional = taskRepository.findById(id);
 		Task task = taskOptional.orElseThrow(() -> new ObjectNotFoundException( "Objeto não encontrado! Id: " + id + ", Tipo: " + Task.class.getName()));
