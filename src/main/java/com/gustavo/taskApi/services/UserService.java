@@ -9,7 +9,7 @@ import com.gustavo.taskApi.dtos.UserDto;
 import com.gustavo.taskApi.dtos.UserNewDto;
 import com.gustavo.taskApi.entities.User;
 import com.gustavo.taskApi.repositories.UserRepository;
-
+import com.gustavo.taskApi.services.exceptions.BusinessException;
 import com.gustavo.taskApi.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -23,6 +23,10 @@ public class UserService {
 	}
 	
 	public UserDto insert(UserNewDto dto) {
+		if(userRepository.existsByCpfOrEmail(dto.getCpf(), dto.getEmail())) {
+			throw new BusinessException("CPF ou Email já cadastrado");
+		}
+		
 		User user = new User(null, dto.getName(), dto.getBirthDate(), dto.getCpf(), dto.getEmail(), dto.getPassword());
 		user = userRepository.save(user);
 		return new UserDto(user);
