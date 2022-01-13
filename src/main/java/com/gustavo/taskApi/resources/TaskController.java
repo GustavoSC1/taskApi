@@ -31,7 +31,6 @@ public class TaskController {
 		TaskDto obj = taskService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
 	
 	@PostMapping()
 	public ResponseEntity<Void> insert(@RequestBody @Valid TaskNewDto taskDto) {
@@ -48,6 +47,5 @@ public class TaskController {
 		
 		return ResponseEntity.ok().body(obj);
 	}
-
-
+	
 }

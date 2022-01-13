@@ -2,16 +2,32 @@ package com.gustavo.taskApi.dtos;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
+
 public class UserNewDto {
 	
+	@NotEmpty(message = "O nome não pode ser vazio")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String name;
 	
+	@NotNull(message = "A data de nascimento não pode ser vazia")
 	private LocalDate birthDate;
 	
+	@NotEmpty(message = "O cpf não pode ser vazio")
+	@CPF(message="Cpf inválido")
 	private String cpf;
 	
+	@NotEmpty(message = "O email não pode ser vazio")
+	@Email(message="Email inválido")
 	private String email;
 	
+	@NotEmpty(message = "A senha não pode ser vazia")
+	@Length(min=8, max=20, message="O tamanho deve ser entre 8 e 20 caracteres")
 	private String password;
 	
 	public UserNewDto() {
