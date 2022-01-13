@@ -34,6 +34,17 @@ public class TaskService {
 		return new TaskDto(task);
 	}
 	
+	public TaskDto update(Long id, TaskNewDto dto) {
+		Task task = findById(id);
+		task.setRegistrationDate(LocalDate.now());
+		task.setDescription(dto.getDescription());
+		task.setTitle(dto.getTitle());
+		
+		task = taskRepository.save(task);
+		
+		return new TaskDto(task);
+	}
+	
 	public Task findById(Long id) {
 		Optional<Task> taskOptional = taskRepository.findById(id);
 		Task task = taskOptional.orElseThrow(() -> new ObjectNotFoundException( "Objeto não encontrado! Id: " + id + ", Tipo: " + Task.class.getName()));
