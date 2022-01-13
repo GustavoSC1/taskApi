@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,13 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<TaskDto> find(@PathVariable Long id) {
+		TaskDto obj = taskService.find(id);
+		return ResponseEntity.ok().body(obj);
+	}
+
+	
 	@PostMapping()
 	public ResponseEntity<Void> insert(@RequestBody @Valid TaskNewDto taskDto) {
 		TaskDto obj = taskService.insert(taskDto);
@@ -30,6 +39,6 @@ public class TaskController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-	}	
+	}
 
 }
