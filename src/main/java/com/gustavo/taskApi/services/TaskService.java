@@ -50,6 +50,12 @@ public class TaskService {
 		taskRepository.delete(task);
 	}
 	
+	public void finishTask(Long id) {
+		Task task = findById(id);
+		task.setDateConclusion(LocalDate.now());
+		taskRepository.save(task);
+	}
+	
 	public Task findById(Long id) {
 		Optional<Task> taskOptional = taskRepository.findById(id);
 		Task task = taskOptional.orElseThrow(() -> new ObjectNotFoundException( "Objeto não encontrado! Id: " + id + ", Tipo: " + Task.class.getName()));
